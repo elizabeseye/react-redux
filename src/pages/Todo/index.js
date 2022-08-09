@@ -12,7 +12,8 @@ const Todo = () => {
 		completed: false,
 	});
 
-	const getTodo = () => {
+	const getSingleTodo = () => {
+		// GET TODO 第五筆
 		dispatch(getTodoAsync('5'));
 	};
 	const addNewTodo = () => {
@@ -27,7 +28,7 @@ const Todo = () => {
 			{todoList.map((item, idx) => {
 				return <p key={idx}>{item.title}</p>;
 			})}
-			<button onClick={getTodo}>GET TODO</button>
+			<button onClick={getSingleTodo}>GET TODO 第五筆</button>
 		</>
 	);
 };

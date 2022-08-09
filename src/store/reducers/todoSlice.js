@@ -10,7 +10,7 @@ export const todoSlice = createSlice({
 		addTodo: (state, action) => {
 			state.todoList.push(action.payload);
 		},
-		getTodo: (state, action) => {
+		setTodo: (state, action) => {
 			state.todoList = [action.payload];
 		},
 	},
@@ -18,13 +18,18 @@ export const todoSlice = createSlice({
 
 export const getTodoAsync = (data) => async (dispatch, getState) => {
 	console.log('getState:', getState());
-	const response = await getTodoAPI(data);
-	dispatch(getTodo(response));
+	const allState = getState();
+	const params = {
+		id: data,
+		userName: allState.userSlice.userName,
+	};
+	const response = await getTodoAPI(params);
+	dispatch(setTodo(response));
 };
 export const addTodoAsync = (data) => async (dispatch) => {
 	const response = await addTodoAPI(data);
 	dispatch(addTodo(response));
 };
 
-export const { addTodo, getTodo } = todoSlice.actions;
+export const { addTodo, setTodo } = todoSlice.actions;
 export default todoSlice.reducer;
